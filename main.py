@@ -1,12 +1,13 @@
-import os
-import box.exceptions import BoxValueError
-import yaml
-from cnnClassifier import logger
-import jsonimport joblib
-from ensure import ensure_annotations
-from box import ConfigBox
-from pathlib import Path
-from typing import Any
-import base64
+from src.cnnClassifier import logger
+from src.cnnClassifier.pipeline.stage_01_data_ingestion import DataIngestionTrainingPipeline
 
 
+STAGE_NAME = "Data Ingestion stage"
+try:
+   logger.info(f">>>>>> stage {STAGE_NAME} started <<<<<<") 
+   data_ingestion = DataIngestionTrainingPipeline()
+   data_ingestion.main()
+   logger.info(f">>>>>> stage {STAGE_NAME} completed <<<<<<\n\nx==========x")
+except Exception as e:
+        logger.exception(e)
+        raise e
